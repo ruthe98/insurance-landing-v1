@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Insurance for Dogs and Cats</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#2A9D8F', secondary: '#F4A261' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #2D3748;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .custom-checkbox {
+            display: inline-block;
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #2A9D8F;
+            border-radius: 4px;
+        }
+
+        .custom-checkbox input:checked~.checkmark {
+            background-color: #2A9D8F;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-checkbox input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: #2A9D8F;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .hero-section {
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 100%), url('https://images.unsplash.com/photo-1632498301446-5f78baad40d0?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: right center;
+        }
+
+        .faq-item[open] .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-3xl font-['Pacifico'] text-primary">Kindwell</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#benefits" class="text-gray-700 hover:text-primary transition-colors">Benefits</a>
+                <a href="#how-it-works" class="text-gray-700 hover:text-primary transition-colors">How It Works</a>
+                <a href="#pricing" class="text-gray-700 hover:text-primary transition-colors">Pricing & Coverage</a>
+                <a href="#faq" class="text-gray-700 hover:text-primary transition-colors">FAQs</a>
+                <button
+                    class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+                    Waitlist</button>
+            </div>
+            <div class="md:hidden w-10 h-10 flex items-center justify-center">
+                <i class="ri-menu-line ri-2x"></i>
+            </div>
+        </div>
+    </nav>
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-50 hidden flex-col pt-20 px-6">
+        <div class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center">
+            <i class="ri-close-line ri-2x"></i>
+        </div>
+        <a href="#benefits" class="py-4 text-lg border-b border-gray-100">Benefits</a>
+        <a href="#how-it-works" class="py-4 text-lg border-b border-gray-100">How It Works</a>
+        <a href="#pricing" class="py-4 text-lg border-b border-gray-100">Pricing & Coverage</a>
+        <a href="#faq" class="py-4 text-lg border-b border-gray-100">FAQs</a>
+        <button
+            class="mt-6 bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+            Waitlist</button>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero-section pt-28 pb-16 md:py-32">
+        <div class="container mx-auto px-6 w-full">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Skip the Stress. We Pay Your Vet Before
+                    You Leave.</h1>
+                <p class="text-xl mb-8 text-gray-700">Flat $50/month pet insurance that locks your price for 3 years —
+                    no waiting for reimbursements. First 100 to join wait list pay $40/month for the first 12 months.
+                </p>
+                <div class="flex flex-col gap-4">
+                    <a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/744b0544-39fb-4c66-9b25-1e181e33e63c"
+                        data-readdy="true">
+                        <button
+                            class="bg-primary text-white px-8 py-4 !rounded-button text-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+                            Wait-List For $40/Month Early Access</button>
+                    </a>
+                    <p class="text-sm text-gray-500">Pricing and coverage subject to regulatory approval</p>
+                </div>
+                <p class="mt-4 text-sm text-gray-600"></p>
+            </div>
+        </div>
+    </section>
+    <!-- Trust Badges -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-6xl mx-auto">
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-bank-card-line text-primary text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-semibold text-gray-800">Instant Vet Pay</span>
+                        <p class="text-sm text-gray-600 mt-2">Bill settled before you leave the vet</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-customer-service-2-line text-primary text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-semibold text-gray-800">24/7 Triage Concierge</span>
+                        <p class="text-sm text-gray-600 mt-2">Vet-tech-checked advice</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-stethoscope-line text-primary text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-semibold text-gray-800">Free Annual Exam</span>
+                        <p class="text-sm text-gray-600 mt-2">One wellness visit included</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-4">
+                        <i class="ri-file-text-line text-primary text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-semibold text-gray-800">One-Page Policy</span>
+                        <p class="text-sm text-gray-600 mt-2">Read it in one minute</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Key Benefits Section -->
+    <section id="benefits" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Benefits</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">We are reimagining pet insurance to be simple,
+                    affordable, useful, and completely transparent.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="benefit-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 flex items-center justify-center text-primary">
+                            <i class="ri-money-dollar-circle-line ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Vet Gets Paid Directly</h3>
+                    <p class="text-gray-600">No more waiting for reimbursements. We pay the vet before you leave the
+                        clinic, so you only pay your portion.</p>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="benefit-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 flex items-center justify-center text-primary">
+                            <i class="ri-price-tag-3-line ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Flat-Rate & 3-Yr Lock</h3>
+                    <p class="text-gray-600">$50 plan (first 100 get $40 yr 1) stays frozen 36 months. Pricing is
+                        subject to regulatory approval.</p>
+                    <p class="mt-2 text-xs text-gray-500"></p>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="benefit-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 flex items-center justify-center text-primary">
+                            <i class="ri-shield-check-line ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Comprehensive Coverage</h3>
+                    <p class="text-gray-600">$750 deductible with 90% reimbursement after deductible. Covers accidents,
+                        cancer, bloat, heart, kidneys, emergency surgery, and more. $12k annual limit at launch.
+                        Coverage is subject to regulatory approval.</p>
+                </div>
+                <!-- Benefit 4 -->
+                <div class="benefit-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 flex items-center justify-center text-primary">
+                            <i class="ri-robot-line ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">24/7 Triage Concierge</h3>
+                    <p class="text-gray-600">Unlimited AI chats reviewed by vet techs in under 15 minutes. Get immediate
+                        guidance on whether your pet needs emergency care.</p>
+                </div>
+                <!-- Benefit 5 -->
+                <div class="benefit-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 flex items-center justify-center text-primary">
+                            <i class="ri-calendar-check-line ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Annual Vet Visit Included</h3>
+                    <p class="text-gray-600">One annual wellness check-up is included in all plans, helping you keep
+                        your pet healthy and catch issues early.</p>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <button
+                    class="bg-primary text-white px-8 py-4 !rounded-button text-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+                    Wait-List For $40/Month Early Access</button>
+                <p class="mt-4 text-xs text-gray-500"></p>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Simple, transparent, and designed with both you and
+                    your pet in mind.</p>
+            </div>
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div
+                    class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-primary bg-opacity-20 transform -translate-x-1/2">
+                </div>
+                <!-- Step 1 -->
+                <div class="flex flex-col md:flex-row items-center mb-16 md:mb-24 relative">
+                    <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 text-center md:text-right">
+                        <div class="flex items-center justify-end mb-2">
+                            <span
+                                class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                <i class="ri-stethoscope-line mr-1"></i>Includes Annual Wellness Visit
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Join & Upload</h3>
+                        <p class="text-gray-600">Answer a few quick questions. We pull past records from your vet and
+                            activate your policy within 24 hours—no forms, no waiting-period clocks.</p>
+                    </div>
+                    <div
+                        class="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-10 w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mb-8 md:mb-0">
+                        1</div>
+                    <div class="md:w-1/2 md:pl-12 md:text-left">
+                        <div
+                            class="w-24 h-24 mx-auto md:mx-0 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+                            <i class="ri-file-upload-line text-primary text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="flex flex-col md:flex-row-reverse items-center mb-16 md:mb-24 relative">
+                    <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0 text-center md:text-left">
+                        <h3 class="text-2xl font-semibold mb-3">24/7 Triage Concierge</h3>
+                        <p class="text-gray-600">AI pinpoints urgency, vet-techs verify answers in <15 min. Get
+                                day-to-day advice, second opinions, or an emergency check: we show cost estimate and how
+                                much is covered before you leave home.</p>
+                    </div>
+                    <div
+                        class="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-10 w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mb-8 md:mb-0">
+                        2</div>
+                    <div class="md:w-1/2 md:pr-12 md:text-right">
+                        <div
+                            class="w-24 h-24 mx-auto md:ml-auto bg-primary bg-opacity-10 rounded-full flex items-center justify-center relative">
+                            <div class="absolute -left-1 top-1/2 transform -translate-y-1/2">
+                                <i class="ri-message-3-line text-primary text-3xl"></i>
+                            </div>
+                            <div class="absolute -right-1 top-1/2 transform -translate-y-1/2">
+                                <i class="ri-map-pin-time-line text-primary text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="flex flex-col md:flex-row items-center mb-16 md:mb-24 relative">
+                    <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 text-center md:text-right">
+                        <h3 class="text-2xl font-semibold mb-3">Head to Any Vet</h3>
+                        <p class="text-gray-600">Your chosen clinic already has your pet's file and pre-auth code when
+                            you walk in. No clipboard surprises.</p>
+                    </div>
+                    <div
+                        class="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-10 w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mb-8 md:mb-0">
+                        3</div>
+                    <div class="md:w-1/2 md:pl-12 md:text-left">
+                        <div
+                            class="w-24 h-24 mx-auto md:mx-0 bg-primary bg-opacity-10 rounded-full flex items-center justify-center relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="ri-computer-line text-primary text-3xl"></i>
+                            </div>
+                            <div class="absolute -bottom-1 -right-1">
+                                <i class="ri-checkbox-circle-line text-primary text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="flex flex-col md:flex-row-reverse items-center relative">
+                    <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0 text-center md:text-left">
+                        <h3 class="text-2xl font-semibold mb-3">We Pay 90 % Instantly (After Your Deductible)</h3>
+                        <p class="text-gray-600">Appointment done, we settle 90 % of the bill on the spot. You pay your
+                            share.</p>
+                    </div>
+                    <div
+                        class="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 z-10 w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mb-8 md:mb-0">
+                        4</div>
+                    <div class="md:w-1/2 md:pr-12 md:text-right">
+                        <div
+                            class="w-24 h-24 mx-auto md:ml-auto bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+                            <i class="ri-bank-card-line text-primary text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/744b0544-39fb-4c66-9b25-1e181e33e63c"
+                    data-readdy="true">
+                    <button
+                        class="bg-primary text-white px-8 py-4 !rounded-button text-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+                        Waitlist For $40/Month Early Access</button>
+                </a>
+                <p class="mt-4 text-gray-600">No commitment required. Be the first to know when we launch.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Plan Comparison -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6" style="max-width: 960px;">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Planned Pricing & Coverage</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">One transparent plan. No confusing tiers, no surprise
+                    rate hikes.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="bg-primary p-6 text-center">
+                        <div class="inline-block bg-white text-primary text-xs font-bold px-3 py-1 rounded-full mb-2">
+                            Early-Access Rate (first 100 spots)</div>
+                        <div class="mt-6">
+                            <span class="text-5xl font-bold text-white">$40</span>
+                            <span class="text-white text-opacity-90">/mo</span>
+                            <p class="mt-2 text-sm text-white text-opacity-90">($50 after year 1)</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-8">
+                            <p class="text-gray-700 text-lg">3-year price lock • Cancel anytime pre-launch</p>
+                        </div>
+                        <a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/744b0544-39fb-4c66-9b25-1e181e33e63c"
+                            data-readdy="true">
+                            <button
+                                class="w-full bg-primary text-white py-4 !rounded-button hover:bg-opacity-90 transition-all text-lg font-medium whitespace-nowrap">Join
+                                the Wait-List</button>
+                        </a>
+                        <p class="mt-4 text-sm text-center text-gray-500"></p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="bg-green-50 p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Covered</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Accidents & Injuries</p>
+                                    <p class="text-sm text-gray-600">Poisoning, foreign-body ingestion, lacerations,
+                                        fractures</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Major Illnesses</p>
+                                    <p class="text-sm text-gray-600">Cancer, bloat/GDV, kidney and heart disease,
+                                        life-threatening conditions</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Emergency Surgery & Specialist Care</p>
+                                    <p class="text-sm text-gray-600">OR fees, board-certified surgeons, oncologists,
+                                        cardiologists, specialist consultations</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Diagnostics</p>
+                                    <p class="text-sm text-gray-600">X-rays, ultrasounds, bloodwork, MRIs, CT scans</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Hospitalisation & Critical Care</p>
+                                    <p class="text-sm text-gray-600">ICU stays, fluids, oxygen, monitoring</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-green-600 mt-1">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Annual Wellness Exam</p>
+                                    <p class="text-sm text-gray-600">One routine check-up per policy year at a partner
+                                        clinic</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="bg-red-50 p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">What's Not Covered</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-red-600 mt-1">
+                                    <i class="ri-close-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Pre-existing Conditions</p>
+                                    <p class="text-sm text-gray-600">Conditions that showed symptoms before coverage
+                                        started</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-red-600 mt-1">
+                                    <i class="ri-close-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Cosmetic Procedures</p>
+                                    <p class="text-sm text-gray-600">Tail docking, ear cropping, nail trimming, grooming
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-red-600 mt-1">
+                                    <i class="ri-close-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Routine Care</p>
+                                    <p class="text-sm text-gray-600">Beyond the one annual wellness exam - vaccinations,
+                                        preventive medications, additional check-ups</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-red-600 mt-1">
+                                    <i class="ri-close-line"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-gray-800">Dental Care</p>
+                                    <p class="text-sm text-gray-600">Routine dental cleanings, extractions, and
+                                        treatment of dental diseases</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Everything you need to know about our pet insurance.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <details class="faq-item mb-4 border border-gray-200 rounded-lg overflow-hidden" open>
+                    <summary class="flex justify-between items-center p-5 bg-white cursor-pointer">
+                        <h3 class="text-lg font-medium">How will the deductible work?</h3>
+                        <div
+                            class="faq-icon w-5 h-5 flex items-center justify-center text-primary transition-transform">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </summary>
+                    <div class="p-5 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-600">Your deductible is the amount you pay out of pocket before your
+                            insurance coverage kicks in. It's an annual deductible, meaning you only have to meet it
+                            once per year, not per incident. With a $750 deductible, once you've paid $750 in eligible
+                            vet expenses during your policy year, we'll start covering 90% of eligible costs for the
+                            rest of the year.</p>
+                    </div>
+                </details>
+                <details class="faq-item mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                    <summary class="flex justify-between items-center p-5 bg-white cursor-pointer">
+                        <h3 class="text-lg font-medium">What is the 3-year price lock guarantee?</h3>
+                        <div
+                            class="faq-icon w-5 h-5 flex items-center justify-center text-primary transition-transform">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </summary>
+                    <div class="p-5 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-600">We guarantee that your monthly premium will not increase for 3 years
+                            from your enrollment date. This applies as long as you maintain continuous coverage. After
+                            the 3-year period, any rate adjustments will be communicated at least 6 months in advance.
+                        </p>
+                    </div>
+                </details>
+                <details class="faq-item mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                    <summary class="flex justify-between items-center p-5 bg-white cursor-pointer">
+                        <h3 class="text-lg font-medium">How fast will claims be paid?</h3>
+                        <div
+                            class="faq-icon w-5 h-5 flex items-center justify-center text-primary transition-transform">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </summary>
+                    <div class="p-5 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-600">We pay the vet directly before you leave the clinic, so there's no
+                            traditional "claim" process for you to worry about. When you visit a vet, simply let them
+                            know you have our insurance. They'll verify your coverage through our system, provide
+                            treatment, and then bill us directly for the covered portion. You only pay your portion
+                            (deductible and coinsurance) at checkout. This eliminates the typical reimbursement waiting
+                            period that can take weeks with other pet insurance companies.</p>
+                    </div>
+                </details>
+                <details class="faq-item mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                    <summary class="flex justify-between items-center p-5 bg-white cursor-pointer">
+                        <h3 class="text-lg font-medium">What is the 24/7 Triage Concierge?</h3>
+                        <div
+                            class="faq-icon w-5 h-5 flex items-center justify-center text-primary transition-transform">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </summary>
+                    <div class="p-5 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-600">It's an always-on chat-based service that helps you gauge how urgent
+                            your pet's issue is. Send symptoms (text, photo) any time—our AI triages them, and a
+                            licensed vet-tech verifies the advice within 15 min. For urgent cases we will show you the
+                            four nearest clinics with live wait-times, book your visit, pre-send records, and give you a
+                            cost + insurance-coverage estimate before you leave home.</p>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 mb-6">Still have questions? We're here to help.</p>
+                <button
+                    class="bg-white border-2 border-primary text-primary px-6 py-3 !rounded-button hover:bg-primary hover:bg-opacity-10 transition-all mr-4 whitespace-nowrap">Contact
+                    Us</button>
+                <a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/744b0544-39fb-4c66-9b25-1e181e33e63c"
+                    data-readdy="true">
+                    <button
+                        class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">Join
+                        Waitlist For $40/Month Early Access</button>
+                </a>
+                <p class="mt-4 text-xs text-gray-500">*Pricing, coverage, and availability are subject to regulatory
+                    approval.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Company Info -->
+                <div>
+                    <a href="#" class="text-2xl font-['Pacifico'] text-white mb-4 block">Kindwell</a>
+                    <p class="text-gray-400 mt-4">No Pet Parent Should Walk Into A Clinic Worried About How They Will
+                        Pay</p>
+                    <div class="flex mt-6 space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700">
+                                <i class="ri-facebook-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700">
+                                <i class="ri-twitter-x-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700">
+                                <i class="ri-instagram-fill"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#benefits" class="text-gray-400 hover:text-white transition-colors">Benefits</a>
+                        </li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition-colors">How It
+                                Works</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">Pricing &
+                                Coverage</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 Pet Insurance Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Floating CTA Button (Mobile Only) -->
+    <div class="fixed bottom-6 right-6 md:hidden z-40">
+        <button class="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center">
+            <i class="ri-arrow-up-line ri-lg"></i>
+        </button>
+    </div>
+    <script id="mobileMenuToggle">
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.querySelector('.ri-menu-line').parentNode;
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeButton = document.querySelector('.ri-close-line').parentNode;
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.style.display = 'flex';
+            });
+            closeButton.addEventListener('click', function () {
+                mobileMenu.style.display = 'none';
+            });
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.style.display = 'none';
+                });
+            });
+        });
+    </script>
+    <script id="smoothScroll">
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            // Floating button scroll to top (mobile)
+            const floatingButton = document.querySelector('.fixed.bottom-6.right-6 button');
+            if (floatingButton) {
+                floatingButton.addEventListener('click', function () {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+    <script id="faqAccordion">
+        document.addEventListener('DOMContentLoaded', function () {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const summary = item.querySelector('summary');
+                summary.addEventListener('click', function (e) {
+                    // Close all other open details
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.hasAttribute('open')) {
+                            otherItem.removeAttribute('open');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
