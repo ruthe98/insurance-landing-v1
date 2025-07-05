@@ -127,7 +127,7 @@ $40/month year 2 onwards
 </div>
 <!-- Form card -->
 <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
-<form id="waitlistForm" action="https://readdy.ai/api/form/d1icth5dgut0mthapg10" method="POST">
+<form id="waitlistForm">
 <!-- Basic Information -->
 <div class="mb-8">
 <h2 class="text-xl font-semibold mb-4 text-gray-800">Your Information</h2>
@@ -327,92 +327,106 @@ Return to homepage
 </div>
 <script id="formHandling">
 document.addEventListener('DOMContentLoaded', function() {
-const waitlistForm = document.getElementById('waitlistForm');
-const submitButton = document.getElementById('submitButton');
-const successMessage = document.getElementById('successMessage');
-const dogFields = document.getElementById('dogFields');
-const petTypeRadios = document.querySelectorAll('input[name="petType"]');
-petTypeRadios.forEach(radio => {
-radio.addEventListener('change', function() {
-if (this.value === 'dog') {
-dogFields.style.display = 'block';
-} else {
-dogFields.style.display = 'none';
-}
-});
-});
-waitlistForm.addEventListener('submit', async function(e) {
-e.preventDefault();
-const formData = new FormData(waitlistForm);
-const formDataObj = {};
-formData.forEach((value, key) => {
-formDataObj[key] = value;
-});
-if (!validateForm(formDataObj)) {
-return;
-}
-submitButton.innerHTML = '<div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div> Processing...';
-submitButton.disabled = true;
-try {
-const response = await fetch(waitlistForm.action, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/x-www-form-urlencoded'
-},
-body: new URLSearchParams(formData).toString()
-});
-if (response.ok) {
-waitlistForm.parentElement.style.display = 'none';
-successMessage.classList.remove('hidden');
-successMessage.scrollIntoView({ behavior: 'smooth' });
-} else {
-throw new Error('Submission failed');
-}
-} catch (error) {
-submitButton.innerHTML = '<span>Join Waitlist</span>';
-submitButton.disabled = false;
-showError('An error occurred. Please try again.');
-}
-});
-function validateForm(formData) {
-if (!formData.firstName?.trim()) {
-showError('Please fill in first name');
-return false;
-}
-if (!formData.email?.trim()) {
-showError('Please fill in email');
-return false;
-}
-if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-showError('Please enter a valid email address');
-return false;
-}
-if (!formData.zipCode?.trim() || !formData.zipCode.match(/^[0-9]{5}$/)) {
-showError('Please enter a valid 5-digit ZIP code');
-return false;
-}
-if (!formData.petName?.trim()) {
-showError('Please fill in pet name');
-return false;
-}
-const petAge = parseFloat(formData.petAge);
-if (isNaN(petAge) || petAge < 0 || petAge > 30) {
-showError('Please enter a valid pet age between 0 and 30');
-return false;
-}
-if (formData.petType === 'dog' && !formData.breed) {
-showError('Please select a breed');
-return false;
-}
-return true;
-}
-function showError(message) {
-const errorDiv = document.createElement('div');
-errorDiv.className = 'fixed top-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg';
-errorDiv.innerHTML = message;
-document.body.appendChild(errorDiv);
-setTimeout(() => errorDiv.remove(), 3000);
-}
+  const waitlistForm = document.getElementById('waitlistForm');
+  const submitButton = document.getElementById('submitButton');
+  const successMessage = document.getElementById('successMessage');
+  const dogFields = document.getElementById('dogFields');
+  const petTypeRadios = document.querySelectorAll('input[name="petType"]');
+
+  // Supabase setup
+  const supabaseUrl = 'https://pehqzajqiayxlwkiqiph.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlaHF6YWpxaWF5eGx3a2lxaXBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE2ODE2ODEsImV4cCI6MjA2NzI1NzY4MX0.DaSXUVyzCZmDfNYtkolMsJn8GHzkP_7z0D4i34Uf00M';
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  petTypeRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'dog') {
+        dogFields.style.display = 'block';
+      } else {
+        dogFields.style.display = 'none';
+      }
+    });
+  });
+
+  waitlistForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(waitlistForm);
+    const formDataObj = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value;
+    });
+    if (!validateForm(formDataObj)) {
+      return;
+    }
+    submitButton.innerHTML = '<div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div> Processing...';
+    submitButton.disabled = true;
+    try {
+      // Prepare data for Supabase
+      const waitlistData = {
+        first_name: formDataObj.firstName,
+        email: formDataObj.email,
+        zip_code: formDataObj.zipCode,
+        pet_type: formDataObj.petType,
+        pet_name: formDataObj.petName,
+        pet_age: parseFloat(formDataObj.petAge),
+        breed: formDataObj.breed || null,
+        gender: formDataObj.gender || null,
+        spayed_neutered: formDataObj.spayedNeutered || null
+      };
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('waitlist_entries')
+        .insert([waitlistData]);
+      if (error) {
+        if (error.code === '23505' || (error.message && error.message.includes('duplicate'))) {
+          showError('This email is already registered on our waitlist!');
+        } else {
+          throw error;
+        }
+      } else {
+        waitlistForm.parentElement.style.display = 'none';
+        successMessage.classList.remove('hidden');
+        successMessage.scrollIntoView({ behavior: 'smooth' });
+      }
+    } catch (error) {
+      submitButton.innerHTML = '<span>Join Waitlist</span>';
+      submitButton.disabled = false;
+      showError('An error occurred. Please try again.');
+    }
+  });
+
+  function validateForm(formData) {
+    if (!formData.firstName?.trim()) {
+      showError('Please fill in first name');
+      return false;
+    }
+    if (!formData.email?.trim()) {
+      showError('Please fill in email');
+      return false;
+    }
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      showError('Please enter a valid email address');
+      return false;
+    }
+    if (!formData.zipCode?.trim() || !formData.zipCode.match(/^[0-9]{5}$/)) {
+      showError('Please enter a valid 5-digit ZIP code');
+      return false;
+    }
+    if (!formData.petName?.trim()) {
+      showError('Please fill in pet name');
+      return false;
+    }
+    const petAge = parseFloat(formData.petAge);
+    if (isNaN(petAge) || petAge < 0 || petAge > 30) {
+      showError('Please enter a valid pet age between 0 and 30');
+      return false;
+    }
+    return true;
+  }
+
+  function showError(message) {
+    alert(message); // You can replace this with a custom UI error message
+  }
 });
 </script>
 </body>
