@@ -100,7 +100,7 @@ background-position: center;
 <!-- Header with back button -->
 <header class="bg-white shadow-sm py-4">
 <div class="container mx-auto px-6 flex items-center">
-<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="flex items-center text-gray-700 hover:text-primary transition-colors">
+<a href="index.html" class="flex items-center text-gray-700 hover:text-primary transition-colors">
 <div class="w-8 h-8 flex items-center justify-center mr-1">
 <i class="ri-arrow-left-line ri-lg"></i>
 </div>
@@ -127,6 +127,10 @@ $40/month year 2 onwards
 </div>
 <!-- Form card -->
 <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+  <div id="formError" class="hidden mb-6 p-4 border-l-4 border-primary bg-red-50 text-red-800 font-medium rounded flex items-center gap-3">
+    <i class="ri-error-warning-line text-primary text-2xl"></i>
+    <span id="formErrorMsg"></span>
+  </div>
 <form id="waitlistForm">
 <!-- Basic Information -->
 <div class="mb-8">
@@ -142,7 +146,8 @@ $40/month year 2 onwards
 <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
 </div>
 <div class="text-sm text-gray-500 md:max-w-[250px]">
-We are designing the product and may reach out to you with updates.
+We are designing the product and may reach out to you with updates.<br>
+<strong class="text-green-700">We will never share your info with anyone.</strong>
 </div>
 </div>
 </div>
@@ -305,10 +310,17 @@ We are designing the product and may reach out to you with updates.
 <p class="text-gray-600 mb-6">
 We would love your help with designing exactly the plan you need. We will get in touch with you shortly with questions about what is important to you in your pet insurance plan.
 </p>
-<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="inline-block bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">
+<a href="index.html" class="inline-block bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">
 Return to homepage
 </a>
-</div>
+<div class="mt-6">
+  <p class="text-gray-700 mb-2">Share this waitlist with friends:</p>
+  <input type="text" readonly value="https://yourdomain.com/Pet-Insurance-Waitlist-Signup.html" class="form-input w-full mb-2" onclick="this.select()">
+  <div class="flex gap-2 justify-center">
+    <a href="https://twitter.com/intent/tweet?text=Join%20me%20on%20the%20Kindwell%20Pet%20Insurance%20waitlist!%20https://yourdomain.com/Pet-Insurance-Waitlist-Signup.html" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded">Share on Twitter</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourdomain.com/Pet-Insurance-Waitlist-Signup.html" target="_blank" class="bg-blue-700 text-white px-4 py-2 rounded">Share on Facebook</a>
+    <a href="mailto:?subject=Join%20me%20on%20the%20Kindwell%20Pet%20Insurance%20waitlist!&body=Sign%20up%20here:%20https://yourdomain.com/Pet-Insurance-Waitlist-Signup.html" class="bg-gray-600 text-white px-4 py-2 rounded">Share via Email</a>
+  </div>
 </div>
 </div>
 </div>
@@ -318,13 +330,13 @@ Return to homepage
 <div class="container mx-auto px-6 text-center">
 <p class="text-gray-500 text-sm">© 2025 Kindwell Pet Insurance. All rights reserved.</p>
 <div class="mt-4">
-<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="text-primary hover:underline text-sm">Privacy Policy</a>
+<a href="privacy-policy.html" class="text-primary hover:underline text-sm">Privacy Policy</a>
 <span class="mx-2 text-gray-300">|</span>
-<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="text-primary hover:underline text-sm">Terms of Service</a>
+<a href="terms-of-service.html" class="text-primary hover:underline text-sm">Terms of Service</a>
 </div>
 </div>
 </footer>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
 <script id="formHandling">
 document.addEventListener('DOMContentLoaded', function() {
   const waitlistForm = document.getElementById('waitlistForm');
@@ -360,6 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     submitButton.innerHTML = '<div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div> Processing...';
     submitButton.disabled = true;
+    hideError();
     try {
       // Prepare data for Supabase
       const waitlistData = {
@@ -378,10 +391,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .from('waitlist_entries')
         .insert([waitlistData]);
       if (error) {
+        submitButton.innerHTML = '<span>Join Waitlist</span>';
+        submitButton.disabled = false;
         if (error.code === '23505' || (error.message && error.message.includes('duplicate'))) {
           showError('This email is already registered on our waitlist!');
         } else {
-          throw error;
+          showError('An error occurred. Please try again.');
         }
       } else {
         waitlistForm.parentElement.style.display = 'none';
@@ -425,7 +440,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function showError(message) {
-    alert(message); // You can replace this with a custom UI error message
+    const errorDiv = document.getElementById('formError');
+    const errorMsg = document.getElementById('formErrorMsg');
+    errorMsg.textContent = message;
+    errorDiv.classList.remove('hidden');
+  }
+
+  function hideError() {
+    const errorDiv = document.getElementById('formError');
+    errorDiv.classList.add('hidden');
+    document.getElementById('formErrorMsg').textContent = '';
   }
 });
 </script>
