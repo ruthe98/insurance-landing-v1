@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Our Early Access Waitlist | Pet Insurance</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2A9D8F',secondary:'#F4A261'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+color: #2D3748;
+background-color: #f9fafb;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Outfit', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.form-input {
+width: 100%;
+padding: 0.75rem 1rem;
+border-radius: 0.5rem;
+background-color: white;
+border: 1px solid #e2e8f0;
+transition: all 0.2s;
+}
+.form-input:focus {
+outline: none;
+border-color: #2A9D8F;
+box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+}
+.form-label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 500;
+color: #4a5568;
+}
+.radio-container {
+display: flex;
+align-items: center;
+position: relative;
+padding-left: 28px;
+cursor: pointer;
+user-select: none;
+}
+.radio-container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.radio-mark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+background-color: white;
+border: 2px solid #cbd5e0;
+border-radius: 50%;
+}
+.radio-container:hover input ~ .radio-mark {
+border-color: #2A9D8F;
+}
+.radio-container input:checked ~ .radio-mark {
+border-color: #2A9D8F;
+}
+.radio-mark:after {
+content: "";
+position: absolute;
+display: none;
+top: 3px;
+left: 3px;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: #2A9D8F;
+}
+.radio-container input:checked ~ .radio-mark:after {
+display: block;
+}
+.form-section {
+background-image: linear-gradient(135deg, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.9) 100%), url('https://readdy.ai/api/search-image?query=A%20happy%20golden%20retriever%20and%20a%20cute%20tabby%20cat%20sitting%20together%20in%20a%20warm%20sunlit%20living%20room%2C%20with%20soft%20pastel%20colors%20in%20the%20background.%20The%20pets%20look%20healthy%20and%20well-cared%20for%2C%20with%20shiny%20coats.%20The%20image%20has%20a%20warm%2C%20inviting%20atmosphere%20with%20soft%20natural%20lighting%20that%20creates%20a%20sense%20of%20comfort%20and%20security.&width=1200&height=800&seq=1&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+</style>
+</head>
+<body>
+<div class="min-h-screen flex flex-col">
+<!-- Header with back button -->
+<header class="bg-white shadow-sm py-4">
+<div class="container mx-auto px-6 flex items-center">
+<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="flex items-center text-gray-700 hover:text-primary transition-colors">
+<div class="w-8 h-8 flex items-center justify-center mr-1">
+<i class="ri-arrow-left-line ri-lg"></i>
+</div>
+<span>Back to main page</span>
+</a>
+<div class="ml-auto">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary">Kindwell</a>
+</div>
+</div>
+</header>
+<!-- Main content -->
+<main class="flex-grow">
+<div class="form-section py-12 md:py-16">
+<div class="container mx-auto px-6">
+<div class="max-w-3xl mx-auto">
+<!-- Form header -->
+<div class="text-center mb-10">
+<h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Join Our Early Access Waitlist</h1>
+<p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+No price changes until 2029<br>
+$30/month for year 1 (first 100 waitlist members)<br>
+$40/month year 2 onwards
+</p>
+</div>
+<!-- Form card -->
+<div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+<form id="waitlistForm" action="https://readdy.ai/api/form/d1icth5dgut0mthapg10" method="POST">
+<!-- Basic Information -->
+<div class="mb-8">
+<h2 class="text-xl font-semibold mb-4 text-gray-800">Your Information</h2>
+<div class="mb-5">
+<label for="firstName" class="form-label">First Name</label>
+<input type="text" id="firstName" name="firstName" class="form-input" placeholder="Your first name" required>
+</div>
+<div class="mb-5">
+<label for="email" class="form-label">Email Address</label>
+<div class="flex flex-col md:flex-row md:items-center gap-3">
+<div class="flex-grow">
+<input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+</div>
+<div class="text-sm text-gray-500 md:max-w-[250px]">
+We are designing the product and may reach out to you with updates.
+</div>
+</div>
+</div>
+<div class="mb-5">
+<label for="zipCode" class="form-label">ZIP Code</label>
+<input type="text" id="zipCode" name="zipCode" class="form-input" placeholder="Enter your ZIP code" pattern="[0-9]{5}" maxlength="5" required>
+</div>
+</div>
+<!-- Pet Information -->
+<div class="mb-8">
+<h2 class="text-xl font-semibold mb-4 text-gray-800">Pet Information</h2>
+<div class="mb-5">
+<label class="form-label">Pet Type</label>
+<div class="flex space-x-6 mt-2">
+<label class="radio-container">
+<span class="ml-2">Dog</span>
+<input type="radio" name="petType" value="dog" checked>
+<span class="radio-mark"></span>
+</label>
+<label class="radio-container">
+<span class="ml-2">Cat</span>
+<input type="radio" name="petType" value="cat">
+<span class="radio-mark"></span>
+</label>
+</div>
+</div>
+<div class="mb-5">
+<label for="petName" class="form-label">Pet Name</label>
+<input type="text" id="petName" name="petName" class="form-input" placeholder="Your pet's name" required>
+</div>
+<div class="mb-5">
+<label for="petAge" class="form-label">Pet Age (years)</label>
+<input type="number" id="petAge" name="petAge" min="0" max="30" step="0.5" class="form-input" placeholder="e.g., 3.5" required>
+</div>
+<!-- Dog-specific fields (initially visible) -->
+<div id="dogFields">
+<div class="mb-5">
+<label for="breed" class="form-label">Breed</label>
+<select id="breed" name="breed" class="form-input pr-8">
+<option value="" disabled selected>Select breed</option>
+<option value="labrador">Labrador Retriever</option>
+<option value="german_shepherd">German Shepherd</option>
+<option value="golden_retriever">Golden Retriever</option>
+<option value="bulldog">Bulldog</option>
+<option value="french_bulldog">French Bulldog</option>
+<option value="beagle">Beagle</option>
+<option value="poodle">Poodle</option>
+<option value="rottweiler">Rottweiler</option>
+<option value="yorkshire">Yorkshire Terrier</option>
+<option value="boxer">Boxer</option>
+<option value="dachshund">Dachshund</option>
+<option value="shih_tzu">Shih Tzu</option>
+<option value="husky">Siberian Husky</option>
+<option value="australian_shepherd">Australian Shepherd</option>
+<option value="great_dane">Great Dane</option>
+<option value="doberman">Doberman Pinscher</option>
+<option value="chihuahua">Chihuahua</option>
+<option value="pomeranian">Pomeranian</option>
+<option value="bernese">Bernese Mountain Dog</option>
+<option value="border_collie">Border Collie</option>
+<option value="corgi">Welsh Corgi</option>
+<option value="schnauzer">Schnauzer</option>
+<option value="cocker_spaniel">Cocker Spaniel</option>
+<option value="pit_bull">Pit Bull</option>
+<option value="chow_chow">Chow Chow</option>
+<option value="mixed">Mixed Breed</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div>
+<label class="form-label">Gender</label>
+<div class="flex space-x-6 mt-2">
+<label class="radio-container">
+<span class="ml-2">Male</span>
+<input type="radio" name="gender" value="male" checked>
+<span class="radio-mark"></span>
+</label>
+<label class="radio-container">
+<span class="ml-2">Female</span>
+<input type="radio" name="gender" value="female">
+<span class="radio-mark"></span>
+</label>
+</div>
+</div>
+<div>
+<label class="form-label">Spayed/Neutered</label>
+<div class="flex space-x-6 mt-2">
+<label class="radio-container">
+<span class="ml-2">Yes</span>
+<input type="radio" name="spayedNeutered" value="yes" checked>
+<span class="radio-mark"></span>
+</label>
+<label class="radio-container">
+<span class="ml-2">No</span>
+<input type="radio" name="spayedNeutered" value="no">
+<span class="radio-mark"></span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Submit button -->
+<div class="mt-8">
+<button type="submit" id="submitButton" class="w-full bg-primary text-white py-4 !rounded-button hover:bg-opacity-90 transition-all text-lg font-semibold whitespace-nowrap flex items-center justify-center">
+<span>Join Waitlist</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Offer summary card -->
+<div class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-primary">
+<h3 class="text-xl font-semibold mb-4 text-gray-800">Early Access Benefits</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">$30/month for first year (first 100 waitlist members only)</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">$40/month from year 2 onwards</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">3-year price lock guarantee</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">Direct vet payment system - no waiting for reimbursements</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">24/7 triage concierge with vet-tech support</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span class="ml-3 text-gray-700">One free annual wellness exam included</span>
+</li>
+</ul>
+</div>
+<!-- Success message (hidden by default) -->
+<div id="successMessage" class="hidden bg-white rounded-xl shadow-lg p-8 text-center mt-8 border-t-4 border-green-500">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="ri-check-line text-green-500 ri-2x"></i>
+</div>
+<h3 class="text-2xl font-semibold mb-4 text-gray-800">You're on the list!</h3>
+<p class="text-gray-600 mb-6">
+We would love your help with designing exactly the plan you need. We will get in touch with you shortly with questions about what is important to you in your pet insurance plan.
+</p>
+<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="inline-block bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">
+Return to homepage
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-200 py-8">
+<div class="container mx-auto px-6 text-center">
+<p class="text-gray-500 text-sm">© 2025 Kindwell Pet Insurance. All rights reserved.</p>
+<div class="mt-4">
+<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="text-primary hover:underline text-sm">Privacy Policy</a>
+<span class="mx-2 text-gray-300">|</span>
+<a href="https://readdy.ai/home/c0285b9d-6821-4f4e-82bc-91e425699569/3117383d-c2e5-414f-bc90-f3e7d3109253" data-readdy="true" class="text-primary hover:underline text-sm">Terms of Service</a>
+</div>
+</div>
+</footer>
+</div>
+<script id="formHandling">
+document.addEventListener('DOMContentLoaded', function() {
+const waitlistForm = document.getElementById('waitlistForm');
+const submitButton = document.getElementById('submitButton');
+const successMessage = document.getElementById('successMessage');
+const dogFields = document.getElementById('dogFields');
+const petTypeRadios = document.querySelectorAll('input[name="petType"]');
+petTypeRadios.forEach(radio => {
+radio.addEventListener('change', function() {
+if (this.value === 'dog') {
+dogFields.style.display = 'block';
+} else {
+dogFields.style.display = 'none';
+}
+});
+});
+waitlistForm.addEventListener('submit', async function(e) {
+e.preventDefault();
+const formData = new FormData(waitlistForm);
+const formDataObj = {};
+formData.forEach((value, key) => {
+formDataObj[key] = value;
+});
+if (!validateForm(formDataObj)) {
+return;
+}
+submitButton.innerHTML = '<div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div> Processing...';
+submitButton.disabled = true;
+try {
+const response = await fetch(waitlistForm.action, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/x-www-form-urlencoded'
+},
+body: new URLSearchParams(formData).toString()
+});
+if (response.ok) {
+waitlistForm.parentElement.style.display = 'none';
+successMessage.classList.remove('hidden');
+successMessage.scrollIntoView({ behavior: 'smooth' });
+} else {
+throw new Error('Submission failed');
+}
+} catch (error) {
+submitButton.innerHTML = '<span>Join Waitlist</span>';
+submitButton.disabled = false;
+showError('An error occurred. Please try again.');
+}
+});
+function validateForm(formData) {
+if (!formData.firstName?.trim()) {
+showError('Please fill in first name');
+return false;
+}
+if (!formData.email?.trim()) {
+showError('Please fill in email');
+return false;
+}
+if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+showError('Please enter a valid email address');
+return false;
+}
+if (!formData.zipCode?.trim() || !formData.zipCode.match(/^[0-9]{5}$/)) {
+showError('Please enter a valid 5-digit ZIP code');
+return false;
+}
+if (!formData.petName?.trim()) {
+showError('Please fill in pet name');
+return false;
+}
+const petAge = parseFloat(formData.petAge);
+if (isNaN(petAge) || petAge < 0 || petAge > 30) {
+showError('Please enter a valid pet age between 0 and 30');
+return false;
+}
+if (formData.petType === 'dog' && !formData.breed) {
+showError('Please select a breed');
+return false;
+}
+return true;
+}
+function showError(message) {
+const errorDiv = document.createElement('div');
+errorDiv.className = 'fixed top-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg';
+errorDiv.innerHTML = message;
+document.body.appendChild(errorDiv);
+setTimeout(() => errorDiv.remove(), 3000);
+}
+});
+</script>
+</body>
+</html>
